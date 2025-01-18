@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./routes/product.route.js";
 import path from "path";
-const cors = require("cors");
+import cors from "cors";
 
 dotenv.config();
 
@@ -16,9 +16,9 @@ app.use(express.json());
 app.use("/api/products", productRoutes);
 
 const __dirname = path.resolve();
+app.use(cors());
 if (process.env.NODE_ENV === "production") {
   //app.use(express.static(path.join(__dirname, "/frontend/dist")));
-  app.use(cors({ origin: "https://your-frontend-url.vercel.app" }));
 }
 
 app.get("*", (req, res) => {
